@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script type="text/javascript" src="http://cdn.tonejs.org/latest/Tone.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.3.16/p5.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.3.16/addons/p5.dom.min.js">
+	</script>
+	<script>	
+	/*
+		tone slider
+		example to try out tone.js
+		plays a sine wave tone when you click a button. 
+		changes the frequency when you slide a slider.
+		uses p5.js for UI elements
+
+		created 21 Feb 2015
+		by Tom Igoe
+	
+	*/
+	var osc = new Tone.Oscillator(24000, "sine");	// make a new oscillator
+	osc.toMaster();									// attach it to the system output
+	var playButton, pitchSlider, pitchDiv;			// UI elements
+
+
+	function setup() {
+		// don't use a canvas (P5.js defaults to one):
+		noCanvas();			
+		// add the UI elements:
+		playButton = createButton('play');		
+		playButton.mouseClicked(playTone);
+		pitchSlider = createSlider(20, 30000, osc.frequency.value);
+		pitchSlider.mouseReleased(changePitch);
+		pitchDiv = createDiv(osc.frequency.value);
+		// position them:
+		playButton.position(10, 10);
+		pitchSlider.position(10, 30);
+		pitchDiv.position(10, 50);
+	}
+
+	function playTone() {
+		if (osc.state === 'stopped') {		// if the tone is stopped
+			osc.start();					// start playing
+			playButton.html("stop");		// change the text of the button
+		} else {							// if the tone is playing
+			osc.stop();						// stop it
+			playButton.html("play");		//change the text of the button
+		}
+	}
+
+	function changePitch() {					
+		osc.setFrequency(pitchSlider.value(), 0);	// set the frequency from the slider
+		pitchDiv.html(osc.frequency.value);			// update the label div
+	}
+	</script>
+	</head>
+	<body>
+	</body>
+</html>

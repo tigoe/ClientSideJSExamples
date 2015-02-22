@@ -1,0 +1,1 @@
+This repository contains various examples of client-side JavaScript programs. Many of them may complement examples in some of my other repositories, notably the [NodeExamples repo](https://github.com/tigoe/NodeExamples).  Many of the examples in this repo will be written using Lauren McCarthy's [p5.js](http://p5js.org/) framework.
